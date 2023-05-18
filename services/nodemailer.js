@@ -30,7 +30,7 @@ async function mailer ( { to,subject,text,html } ) {
     const imagePath = path.join( __dirname,'./mail-template/images/')
     let htmlTemplate = getFile( './mail-template/mail-template.html' )
         .replace( '$USERNAME','RAJAT' )
-        .replaceAll( '$IMAGEPATH',imagePath )
+        .replace( /\$IMAGEPATH/gm,imagePath )
 
     let info = await transporter.sendMail( {
         from: `"Rajat Karmokar" ${testAccount.user}`, // sender address
@@ -41,7 +41,7 @@ async function mailer ( { to,subject,text,html } ) {
     } );
 
     console.log( "Preview URL: %s",nodemailer.getTestMessageUrl( info ) );
-    console.log(htmlTemplate);
+    // console.log(htmlTemplate);
     // console.log( "Message sent: %s",info.messageId );
 }
 
