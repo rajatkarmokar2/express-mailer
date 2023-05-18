@@ -30,7 +30,7 @@ async function mailer ( { to,subject,text,html } ) {
     const imagePath = path.join( __dirname,'./mail-template/images/')
     let htmlTemplate = getFile( './mail-template/mail-template.html' )
         .replace( '$USERNAME','RAJAT' )
-        .replace( /\$IMAGEPATH/gm,imagePath )
+        .replace( /\$IMAGEPATH/gm,process.env.DOMAIN )
 
     let info = await transporter.sendMail( {
         from: `"Rajat Karmokar" ${testAccount.user}`, // sender address
